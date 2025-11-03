@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 // Helper to run Stockfish and get output with debug logging
 function runStockfish(fen) {
   return new Promise((resolve, reject) => {
-    const stockfishPath = "C:\\Program Files\\stockfish\\stockfish.exe"; // Adjust path as necessary
+    // const stockfishPath = "C:\\Program Files\\stockfish\\stockfish.exe"; // Adjust path as necessary
+    const stockfishPath = '../cpp-engine/stockfish.exe';
     console.log(`[DEBUG] Launching Stockfish: ${stockfishPath}`);
 
     const engine = spawn(stockfishPath);

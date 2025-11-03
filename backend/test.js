@@ -4,19 +4,15 @@ async function runTest() {
   const db = await connectDB();
   const users = db.collection("users");
 
-  // Insert Alice only if she doesn't already exist
-  await users.updateOne(
-    { name: "Alice" },          // filter
-    { $set: { role: "tester" } }, // update data
-    { upsert: true }            // insert if not exists
-  );
+  // 🧹 Delete all users
+  await users.deleteMany({});
+  console.log("All users deleted");
 
-  // Fetch all users
-  const allUsers = await users.find().toArray();
-  console.log(allUsers);
+  // Optional: verify deletion
+  const remaining = await users.find().toArray();
+  console.log("Remaining users:", remaining);
 
-  // Close connection
-  db.client?.close(); // optional safety in case MongoClient exposes client
+  db.client?.close();
 }
 
 runTest();

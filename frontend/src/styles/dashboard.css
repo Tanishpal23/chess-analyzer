@@ -1,0 +1,113 @@
+/* 🌍 Fullscreen layout */
+.dashboard-fullscreen {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;            /* ✅ full screen width */
+  height: 100vh;           /* ✅ full screen height */
+  background-color: #262626;
+  overflow: hidden;
+}
+
+/* 🖼 Left section (Image area) */
+.dashboard-left {
+  flex: 1;
+  width: 50vw;             /* ✅ exactly half the screen */
+  height: 100vh;           /* ✅ fills full height */
+  background: linear-gradient(180deg, #1e1e1e, #111);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* ✅ fills the left half completely */
+}
+
+/* 🧠 Right section (Content area) */
+.dashboard-right {
+  flex: 1;
+  width: 50vw;             /* ✅ other half of screen */
+  height: 100vh;
+  background: #222222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+.dashboard-content {
+  max-width: 500px;
+  color: #fff;
+}
+
+.dashboard-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.dashboard-subtext {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+/* 🟩 Button styling */
+.get-started-btn {
+  background: #91cd5a;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.14s, box-shadow 0.12s;
+  box-shadow: 0 4px 12px rgba(145, 205, 90, 0.16);
+}
+
+.get-started-btn:hover {
+  background: #7ebb49;
+  box-shadow: 0 6px 18px rgba(145, 205, 90, 0.25);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 900px) {
+  .dashboard-fullscreen {
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+  }
+
+  .dashboard-left,
+  .dashboard-right {
+    width: 100vw;
+    height: 50vh;
+  }
+
+  .dashboard-hero-img {
+    object-fit: cover;
+  }
+
+  .dashboard-right {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-subtext {
+    font-size: 1rem;
+  }
+
+  .get-started-btn {
+    font-size: 1.1rem;
+    padding: 0.9rem 2rem;
+  }
+}

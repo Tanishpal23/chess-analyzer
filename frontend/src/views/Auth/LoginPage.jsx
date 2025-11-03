@@ -1,0 +1,189 @@
+// import React, { useState } from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import { Link } from "react-router-dom";
+
+// const Login = () => {
+//   const [form, setForm] = useState({ email: "", password: "" });
+
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     alert("Login Submitted:", form);
+//   };
+
+//   return (
+//     <div
+//       className="d-flex align-items-center justify-content-center bg-light"
+//       style={{
+//         minHeight: "100vh",
+//         width: "100%",
+//         position: "fixed",
+//         top: 0,
+//         left: 0,
+//         zIndex: 10,
+//       }}
+//     >
+//       <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+//         <h3 className="text-center mb-4">Welcome Back</h3>
+
+//         <form onSubmit={handleSubmit}>
+//           <div className="mb-3">
+//             <label className="form-label">Email address</label>
+//             <input
+//               type="email"
+//               name="email"
+//               className="form-control"
+//               placeholder="Enter your email"
+//               value={form.email}
+//               onChange={handleChange}
+//               required
+//             />
+//           </div>
+
+//           <div className="mb-2">
+//             <label className="form-label">Password</label>
+//             <input
+//               type="password"
+//               name="password"
+//               className="form-control"
+//               placeholder="Enter your password"
+//               value={form.password}
+//               onChange={handleChange}
+//               required
+//             />
+//           </div>
+
+//           <div className="d-flex justify-content-between mb-3">
+//             <Link to="/forgot-password" className="text-decoration-none small">
+//               Forgot Password?
+//             </Link>
+//           </div>
+
+//           <button type="submit" className="btn btn-primary w-100">
+//             Login
+//           </button>
+//         </form>
+
+//         <div className="text-center mt-3">
+//           <span className="text-muted">Don't have an account? </span>
+//           <Link to="/signup" className="text-primary text-decoration-none fw-semibold">
+//             Sign Up
+//           </Link>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const Login = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // to redirect after login
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // send POST request to backend
+      const res = await axios.post("http://localhost:5000/api/users/login", {
+        email: form.email,
+        password: form.password,
+      });
+
+      // store token or user info in localStorage
+      localStorage.setItem("user", JSON.stringify(res.data));
+
+      alert("✅ Login successful!");
+      console.log("User Logged In:", res.data);
+
+      // redirect to dashboard or home
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("❌ Login error:", err.response?.data || err.message);
+      alert(err.response?.data?.error || "Invalid email or password");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className="d-flex align-items-center justify-content-center bg-light"
+      style={{
+        minHeight: "100vh",
+        width: "100%",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 10,
+      }}
+    >
+      <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <h3 className="text-center mb-4">Welcome Back</h3>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Email address</label>
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              placeholder="Enter your email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-2">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              placeholder="Enter your password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="d-flex justify-content-between mb-3">
+            <Link to="/forgot-password" className="text-decoration-none small">
+              Forgot Password?
+            </Link>
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <div className="text-center mt-3">
+          <span className="text-muted">Don't have an account? </span>
+          <Link to="/signup" className="text-primary text-decoration-none fw-semibold">
+            Sign Up
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
