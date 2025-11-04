@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext.jsx";
+import bgImage from "../../assets/loginbgimg.png";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,13 +21,12 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: form.email,
         password: form.password,
       });
 
       login(res.data); // ✅ store in context
-      alert("✅ Login successful!");
       navigate("/profile"); // ✅ redirect
     } catch (err) {
       alert(err.response?.data?.error || "Invalid email or password");
@@ -39,6 +39,11 @@ const LoginPage = () => {
     <div
       className="d-flex align-items-center justify-content-center bg-light"
       style={{
+        
+    // backgroundImage: `url(${bgImage})`, // 👈 your image path
+    // backgroundSize: "cover",                 // make it cover the whole screen
+    // backgroundPosition: "center",            // center the image
+    // backgroundRepeat: "no-repeat", 
         minHeight: "100vh",
         width: "100%",
         position: "fixed",
@@ -47,7 +52,7 @@ const LoginPage = () => {
         zIndex: 10,
       }}
     >
-      <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px"}}>
         <h3 className="text-center mb-4">Welcome Back</h3>
 
         <form onSubmit={handleSubmit}>

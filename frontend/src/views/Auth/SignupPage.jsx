@@ -24,7 +24,7 @@ const SignupPage = () => {
       return alert("Passwords do not match!");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/signup", {
+      const res = await axios.post("http://localhost:5000/api/auth/signup", {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -41,7 +41,7 @@ const SignupPage = () => {
   return (
     <div
       className="d-flex align-items-center justify-content-center bg-light"
-      style={{
+        style={{
         minHeight: "100vh",
         width: "100%",
         position: "fixed",
