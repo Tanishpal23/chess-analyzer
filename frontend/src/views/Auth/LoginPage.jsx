@@ -40,10 +40,6 @@ const LoginPage = () => {
       className="d-flex align-items-center justify-content-center bg-light"
       style={{
         
-    // backgroundImage: `url(${bgImage})`, // 👈 your image path
-    // backgroundSize: "cover",                 // make it cover the whole screen
-    // backgroundPosition: "center",            // center the image
-    // backgroundRepeat: "no-repeat", 
         minHeight: "100vh",
         width: "100%",
         position: "fixed",

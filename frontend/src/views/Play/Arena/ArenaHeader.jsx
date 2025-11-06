@@ -1,10 +1,11 @@
+
 // src/views/Play/Arena/ArenaHeader.jsx
 export default function ArenaHeader({ mode, logic }) {
   const { whitePlayer, blackPlayer, clocks, resultBanner } = logic;
   return (
-    <header className="d-flex align-items-center justify-content-between px-2">
+    <header className="arena-header d-flex align-items-center justify-content-between px-2" style={{paddingTop: '70px'}}>
       <div className="d-flex align-items-center gap-2">
-        <span className="badge bg-secondary text-uppercase">{mode}</span>
+        <span className="badge bg-secondary rounded-pill text-uppercase">{mode}</span>
         <span className="fw-semibold">{whitePlayer?.displayName || "Anonymous"}</span>
         <span className="text-muted">vs</span>
         <span className="fw-semibold">{blackPlayer?.displayName || "Anonymous"}</span>
@@ -25,3 +26,4 @@ export default function ArenaHeader({ mode, logic }) {
     </header>
   );
 }
+

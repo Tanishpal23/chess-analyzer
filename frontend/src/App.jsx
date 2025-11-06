@@ -9,8 +9,10 @@ import Header from "./views/Common/Header.jsx";
 import ArenaPage from "./views/Play/ArenaPage.jsx";
 import "./styles/dashboard.css";
 import "./styles/LoginPage.css";
+import "./styles/ArenaPage.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 
 function App() {
   const handleGetStarted = () => {

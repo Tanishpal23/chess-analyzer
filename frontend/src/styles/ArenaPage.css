@@ -1,0 +1,176 @@
+/* /* Theme tokens */
+
+:root {
+  --arena-bg: #f6f6f3;
+  --arena-surface: #ffffff;
+  --arena-border: #e6e3de;
+  --arena-muted: #6f6b65;
+  --arena-accent: #4f46e5;
+  --arena-green: #3fb950;
+  --arena-red: #e5534b;
+  --arena-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --arena-shadow-md: 0 6px 20px rgba(16, 24, 40, 0.06);
+}
+[data-bs-theme="dark"] {
+  --arena-bg: #16181a;
+  --arena-surface: #1d2125;
+  --arena-border: #2a2f34;
+  --arena-muted: #a6adb4;
+  --arena-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --arena-shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+} /* Page scaffold */
+body .arena-page {
+  background: var(--arena-bg);
+} /* Header strip reminiscent of the reference */
+.arena-header {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0));
+  border: 1px solid var(--arena-border);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: var(--arena-shadow-sm);
+}
+.arena-header .badge.rounded-pill {
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+} /* Column cards */
+.card.arena-panel {
+  background: var(--arena-surface);
+  border: 1px solid var(--arena-border);
+  border-radius: 12px;
+  box-shadow: var(--arena-shadow-md);
+}
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--arena-border);
+  font-weight: 600;
+  color: #2b2a28;
+}
+.card-footer {
+  background: transparent;
+  border-top: 1px solid var(--arena-border);
+} /* Board framing */
+.board-wrap {
+  background: var(--arena-surface);
+  border: 1px solid var(--arena-border);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: var(--arena-shadow-md);
+}
+#arena-board {
+  border-radius: 10px !important;
+} /* Digital clocks like the screenshot */
+.clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #fff;
+  border: 1px solid var(--arena-border);
+  border-radius: 14px;
+  padding: 0.35rem 0.65rem;
+  box-shadow: var(--arena-shadow-sm);
+}
+.clock .value {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.75rem;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+.clock--active {
+  background: #fff4f4;
+  border-color: #f1c5c3;
+}
+.clock-pill {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: #ffeef0;
+  border: 1px solid #ffd7db;
+} /* Chat panel */
+.chat-body {
+  height: 380px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.chat-body::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: #d8d5d0;
+  border-radius: 10px;
+}
+.chat-msg {
+  color: var(--arena-muted);
+  font-size: 0.92rem;
+} /* Moves + FEN on right */
+.moves-list {
+  max-height: 260px;
+  overflow: auto;
+}
+.moves-toolbar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+}
+.moves-toolbar .btn {
+  padding: 0.375rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--arena-border);
+  background: #faf9f7;
+}
+.moves-toolbar .btn:hover {
+  background: #fff;
+  border-color: var(--arena-accent);
+  color: var(--arena-accent);
+}
+.fen-string {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 0.86rem;
+  color: var(--arena-muted);
+  background: #fbfaf9;
+  border: 1px dashed var(--arena-border);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+  word-break: break-all;
+} /* Action buttons stack under toolbar */
+.actions-stack .btn {
+  border-radius: 10px;
+  border: 1px solid var(--arena-border);
+}
+.actions-stack .btn:hover {
+  border-color: var(--arena-accent);
+  color: var(--arena-accent);
+}
+.actions-stack .btn-danger {
+  border-color: #f1c5c3;
+  background: #fff5f4;
+  color: #c0392b;
+}
+.actions-stack .btn-success {
+  border-color: #bfe8c9;
+  background: #f5fff7;
+  color: #1f7a42;
+} /* Tooltips – slightly larger */
+.tooltip .tooltip-inner {
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+} /* Offcanvas borders match */
+.offcanvas {
+  border-right: 1px solid var(--arena-border);
+} /* Compact spacing on small screens */
+@media (max-width: 576px) {
+  .arena-header {
+    padding: 0.45rem 0.6rem;
+  }
+  .clock .value {
+    font-size: 1.4rem;
+  }
+  .chat-body {
+    height: 280px;
+  }
+  .moves-list {
+    max-height: 200px;
+  }
+}
+
