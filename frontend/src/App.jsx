@@ -6,7 +6,7 @@ import SignupPage from "./views/Auth/SignupPage.jsx";
 import ProfilePage from "./views/Profile/ProfilePage.jsx";
 import TimerSetupPage from "./views/Play/TimerSetupPage.jsx";
 import Header from "./views/Common/Header.jsx";
-// import ArenaPage from "./views/Play/ArenaPage.jsx";
+import ArenaPage from "./views/Play/ArenaPage.jsx";
 import "./styles/dashboard.css";
 import "./styles/LoginPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,7 +30,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/play/timer" element={<TimerSetupPage />} />
 
-        {/* <Route path="/play/arena" element={<ArenaPage />} /> */}
+        <Route path="/play/arena" element={<ArenaPage />} />
         {/* ✅ */}
       </Routes>
     </>

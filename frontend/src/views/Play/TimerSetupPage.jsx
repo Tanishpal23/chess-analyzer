@@ -1,12 +1,10 @@
-
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GameContext } from "../../context/GameContext.jsx";
-import { Modal } from 'bootstrap';
+import { Modal } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../../styles/TimerSetupPage.css";
-
 
 const PRESETS = [
   // Row 1
@@ -43,8 +41,6 @@ export default function TimerSetupPage() {
       hasTimer: true,
     });
     navigate("/play/arena");
-
-    
   };
 
   const startNoTimer = () => {
@@ -57,31 +53,36 @@ export default function TimerSetupPage() {
     navigate("/play/arena");
   };
 
- const handleCustomStart = () => {
-  const m = Number(customMinutes);
-  const i = Number(customInc);
+  const handleCustomStart = () => {
+    const m = Number(customMinutes);
+    const i = Number(customInc);
 
-  if (!Number.isFinite(m) || !Number.isFinite(i) || m < 0 || i < 0) {
-    setError("Enter non-negative numbers");
-    return;
-  }
+    if (!Number.isFinite(m) || !Number.isFinite(i) || m < 0 || i < 0) {
+      setError("Enter non-negative numbers");
+      return;
+    }
 
-  setError("");
+    setError("");
 
-  // ✅ Hide modal manually (Bootstrap 5 API)
-  const modalEl = document.getElementById("customTimeModal");
-  if (modalEl) {
-    // const modalInstance =
-    //   window.bootstrap.Modal.getInstance(modalEl) ||
-    //   new window.bootstrap.Modal(modalEl);
-    // modalInstance.hide();
+    // ✅ Hide modal manually (Bootstrap 5 API)
+    const modalEl = document.getElementById("customTimeModal");
+    if (modalEl) {
+      
+      const modalInstance = Modal.getInstance(modalEl) || new Modal(modalEl);
+      modalInstance.hide();
 
-
-    const modalInstance = Modal.getInstance(modalEl) || new Modal(modalEl);
-modalInstance.hide();
-
-    // Wait for modal animation (~300ms), then navigate
-    setTimeout(() => {
+      // Wait for modal animation (~300ms), then navigate
+      setTimeout(() => {
+        setTimeControl({
+          kind: "increment",
+          baseMinutes: m,
+          incrementSeconds: i,
+          hasTimer: true,
+        });
+        navigate("/play/arena");
+      }, 300);
+    } else {
+      // fallback if modal not found
       setTimeControl({
         kind: "increment",
         baseMinutes: m,
@@ -89,20 +90,8 @@ modalInstance.hide();
         hasTimer: true,
       });
       navigate("/play/arena");
-    }, 300);
-  } else {
-    // fallback if modal not found
-    setTimeControl({
-      kind: "increment",
-      baseMinutes: m,
-      incrementSeconds: i,
-      hasTimer: true,
-    });
-    navigate("/play/arena");
-  }
-};
-
-
+    }
+  };
 
   return (
     <div className="timer-setup-container">
@@ -218,32 +207,23 @@ modalInstance.hide();
                 >
                   Cancel
                 </button>
-                {/* <button
-  type="button"
-  className="btn btn-primary"
-  onClick={handleCustomStart}
->
-  Start
-</button> */}
-
-<button
-  type="button"
-  className="btn btn-primary"
-  data-bs-dismiss="modal"
-  onClick={() => {
-    setTimeControl({
-      kind: "increment",
-      baseMinutes: Number(customMinutes),
-      incrementSeconds: Number(customInc),
-      hasTimer: true,
-    });
-    navigate("/play/arena");
-  }}
->
-  Start
-</button>
-
-
+  
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                  onClick={() => {
+                    setTimeControl({
+                      kind: "increment",
+                      baseMinutes: Number(customMinutes),
+                      incrementSeconds: Number(customInc),
+                      hasTimer: true,
+                    });
+                    navigate("/play/arena");
+                  }}
+                >
+                  Start
+                </button>
               </div>
             </div>
           </div>
