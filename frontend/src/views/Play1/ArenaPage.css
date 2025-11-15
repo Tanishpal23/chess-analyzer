@@ -8,36 +8,23 @@
   --border: #e5e7eb;
   --shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
 }
-
 * {
   box-sizing: border-box;
 }
-
-html, body {
-  height: 100%;
+body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font: 14px/1.45 system-ui, Segoe UI, Roboto, Arial;
-  overflow: hidden; /* ✅ Prevent outer body scroll */
 }
-
-/* ================================
-   ARENA LAYOUT
-================================ */
 .arena {
   display: grid;
   grid-template-columns: 300px 1fr 340px;
   gap: 16px;
-  height: 100dvh; /* ✅ Full viewport height */
   padding: 16px;
-  overflow: hidden; /* ✅ Contain everything inside */
-  box-sizing: border-box;
-}
-
-/* ================================
-   PANEL STYLES
-================================ */
+  min-height: 90dvh;
+  max-height: 90dvh;
+} /* Panels */
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -46,9 +33,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden; /* ✅ prevent outer scroll */
 }
-
 .panel-title {
   padding: 10px 12px;
   border-bottom: 1px solid var(--border);
@@ -57,17 +42,13 @@ html, body {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 12px;
-}
-
-/* ================================
-   CHAT PANEL
-================================ */
+} /* Chat */
 .chat {
   overflow: hidden;
 }
 .chat-log {
   flex: 1;
-  overflow-y: auto;
+  overflow: auto;
   padding: 12px;
 }
 .chat-input {
@@ -92,17 +73,12 @@ html, body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-/* ================================
-   CENTER BOARD AREA
-================================ */
+} /* Center board area */
 .center {
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 12px;
 }
-
 .player-bar {
   display: flex;
   align-items: center;
@@ -119,9 +95,7 @@ html, body {
   border: 1px solid var(--border);
   padding: 4px 8px;
   border-radius: 8px;
-}
-
-/* ✅ Responsive square board */
+} /* Square responsive board */
 .board-wrap {
   place-self: center;
   width: clamp(320px, 66vh, 860px);
@@ -131,23 +105,15 @@ html, body {
   border-radius: 16px;
   padding: 10px;
   display: grid;
-}
-
-/* ================================
-   RIGHT PANEL (MOVES, CONTROLS, FEN, PGN)
-================================ */
+} /* Right column */
 .right {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* ✅ prevents right panel from expanding */
+  overflow: auto;
   padding-bottom: 8px;
 }
-
-/* ✅ Only moves-list scrolls */
 .moves-list {
-  flex: 1;
-  overflow-y: auto;
   padding: 10px 12px;
+  max-height: clamp(180px, 32vh, 380px);
+  overflow-y: auto;
 }
 .moves {
   margin: 0;
@@ -162,10 +128,6 @@ html, body {
 .mv.b {
   color: var(--muted);
 }
-
-/* ================================
-   SECTION & BUTTONS
-================================ */
 .section {
   padding: 8px 12px 12px;
   border-top: 1px solid var(--border);
@@ -194,10 +156,6 @@ html, body {
   border-color: #cbd5e1;
   background: #eef2f7;
 }
-
-/* ================================
-   FEN + PGN AREAS
-================================ */
 .section.fen code {
   display: block;
   padding: 8px;
@@ -216,11 +174,25 @@ html, body {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px;
+} /* Mobile stacking */
+@media (max-width: 1100px) {
+  .arena {
+    grid-template-columns: 1fr;
+  }
+  .panel.chat {
+    order: 3;
+  }
+  .panel.right {
+    order: 2;
+  }
+  .center {
+    order: 1;
+  }
+  .board-wrap {
+    width: clamp(300px, 76vw, 92vw);
+    height: clamp(300px, 76vw, 92vw);
+  }
 }
-
-/* ================================
-   COPY BUTTON (Your existing style)
-================================ */
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -246,42 +218,4 @@ html, body {
   color: white;
   border-color: var(--accent-color, #0077ff);
   transform: scale(1.03);
-}
-
-/* ================================
-   RESPONSIVE LAYOUT
-================================ */
-@media (max-width: 1100px) {
-  .arena {
-    grid-template-columns: 1fr;
-    height: 100dvh;
-    overflow: hidden;
-  }
-  .panel.chat {
-    order: 3;
-  }
-  .panel.right {
-    order: 2;
-  }
-  .center {
-    order: 1;
-  }
-  .board-wrap {
-    width: clamp(300px, 76vw, 92vw);
-    height: clamp(300px, 76vw, 92vw);
-  }
-}
-
-/* ================================
-   SCROLLBAR POLISH (Optional)
-================================ */
-.moves-list::-webkit-scrollbar,
-.chat-log::-webkit-scrollbar {
-  width: 6px;
-}
-
-.moves-list::-webkit-scrollbar-thumb,
-.chat-log::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
 }
