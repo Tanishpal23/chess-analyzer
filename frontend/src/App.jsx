@@ -4,12 +4,12 @@ import DashboardPage from "./views/Dashboard/DashboardPage.jsx";
 import LoginPage from "./views/Auth/LoginPage.jsx";
 import SignupPage from "./views/Auth/SignupPage.jsx";
 import ProfilePage from "./views/Profile/ProfilePage.jsx";
-import TimerSetupPage from "./views/Play/TimerSetupPage.jsx";
+import TimerSetupPage from "./views/Play1/TimerSetupPage.jsx";
 import Header from "./views/Common/Header.jsx";
-import ArenaPage from "./views/Play/ArenaPage.jsx";
+import ArenaPage from "./views/Play1/ArenaPage.jsx";
 import "./styles/dashboard.css";
 import "./styles/LoginPage.css";
-import "./styles/ArenaPage.css"
+import "../src/views/Play1/ArenaPage.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
