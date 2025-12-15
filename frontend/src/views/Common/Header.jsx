@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useChessStore } from "../../store/useChessStore.js";
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const {playMode} = useChessStore();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -20,14 +22,19 @@ const Header = () => {
 
   const handlePlayOption = (mode) => {
     setIsDropdownOpen(false);
+
+    useChessStore.getState().setPlayMode(mode);
+    
     // Navigate to timer setup screen, passing mode (local, friend, computer)
-    navigate(`/play/timer?mode=${mode}`);
+    // navigate(`/play/timer?mode=${mode}`);
+
+    navigate('/play/arena');
   };
 
   return (
     <header
       className="d-flex justify-content-center align-items-center py-3 bg-dark text-white shadow-sm w-100"
-      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000 }}
+      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, height: "10dvh",}}
     >
       <div className="d-flex align-items-center gap-3 w-100 px-4" style={{ maxWidth: "1200px" }}>
         <ul
@@ -51,7 +58,16 @@ const Header = () => {
             </Link>
           </li>
 
-          {/* 🔽 Play Dropdown */}
+
+          <li className="nav-item" role="presentation">
+            <button
+                  className="dropdown-item rounded-3 py-2"
+                  onClick={() => handlePlayOption("local")}
+                >
+                  Play
+                </button>
+          </li>
+          {/* 🔽 Play Dropdown
           <li className="nav-item dropdown" role="presentation">
             <button
               className={`nav-link dropdown-toggle rounded-5${
@@ -101,7 +117,7 @@ const Header = () => {
                 </button>
               </li>
             </ul>
-          </li>
+          </li> */}
 
           {/* Analyze */}
           <li className="nav-item" role="presentation">

@@ -2,8 +2,8 @@
 .dashboard-fullscreen {
   display: flex;
   flex-direction: row;
-  width: 100vw;            /* ✅ full screen width */
-  height: 100vh;           /* ✅ full screen height */
+  width: 100dvw;            /* ✅ full screen width */
+  height: 90dvh;           /* ✅ full screen height */
   background-color: #262626;
   overflow: hidden;
 }

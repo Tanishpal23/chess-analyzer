@@ -7,6 +7,9 @@ import ProfilePage from "./views/Profile/ProfilePage.jsx";
 import TimerSetupPage from "./views/Play1/TimerSetupPage.jsx";
 import Header from "./views/Common/Header.jsx";
 import ArenaPage from "./views/Play1/ArenaPage.jsx";
+
+import Analyze from "./views/Analyze/Analyze.jsx";
+import "./views/Analyze/Analyze.css";
 import "./styles/dashboard.css";
 import "./styles/LoginPage.css";
 import "../src/views/Play1/ArenaPage.css"
@@ -22,7 +25,8 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
+      <div style={{ marginTop: "10dvh" }}>
+      <Routes >
         <Route
           path="/"
           element={<DashboardPage onGetStarted={handleGetStarted} />}
@@ -33,8 +37,10 @@ function App() {
         <Route path="/play/timer" element={<TimerSetupPage />} />
 
         <Route path="/play/arena" element={<ArenaPage />} />
+        <Route path="/analyze" element={<Analyze />}/>
         {/* ✅ */}
       </Routes>
+      </div>
     </>
   );
 }

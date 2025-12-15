@@ -1,9 +1,8 @@
 
-
 // Navigation.jsx
 import React from "react";
 
-export default function Navigation() {
+export default function Navigation(goToFirst) {
   return (
     <div className="section">
       <div className="section-title">Navigation</div>

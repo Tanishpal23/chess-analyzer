@@ -1,15 +1,17 @@
 import React from "react";
-import ChatPanel from "./components/ChatPanel";
-import MoveList from "./components/MoveList";
+import ChatPanel from "./Components/ChatPanel.jsx";
+import MoveList from "./Components/MoveList.jsx";
 import Controls from "./Components/Controls.jsx";
-import Navigation from "./components/Navigation";
-import Fen from "./components/Fen";
-import Pgn from "./components/Pgn";
-import Player1 from "./components/Player1";
-import Player2 from "./components/Player2";
-import BoardArea from "./components/BoardArea";
+import Navigation from "./Components/Navigation.jsx";
+import Fen from "./Components/Fen.jsx";
+import Pgn from "./Components/Pgn.jsx";
+import Player1 from "./Components/Player1";
+import Player2 from "./Components/Player2";
+// import BoardArea from "./Components/BoardArea";
 import { useChessStore } from "../../store/useChessStore";
 
+
+import BoardArea from "./Components/BoardAreaComputer.jsx"
 export default function ArenaPage() {
   const {
     fen,

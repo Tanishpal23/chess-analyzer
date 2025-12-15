@@ -1,5 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+
+
 import { GameContext } from "../../context/GameContext.jsx";
 import { Modal } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,8 +30,11 @@ const PRESETS = [
 
 export default function TimerSetupPage() {
   const navigate = useNavigate();
-  const { setTimeControl } = useContext(GameContext);
 
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get("mode");
+
+  const { setTimeControl } = useContext(GameContext);
   const [customMinutes, setCustomMinutes] = useState(10);
   const [customInc, setCustomInc] = useState(0);
   const [error, setError] = useState("");
@@ -40,7 +46,9 @@ export default function TimerSetupPage() {
       incrementSeconds: inc,
       hasTimer: true,
     });
-    navigate("/play/arena");
+    // navigate(`/play/arena/`);
+    
+    navigate(`/play/arena?m=${m}&inc=${inc}&mode=${mode}`);
   };
 
   const startNoTimer = () => {
@@ -50,7 +58,9 @@ export default function TimerSetupPage() {
       incrementSeconds: 0,
       hasTimer: false,
     });
-    navigate("/play/arena");
+    // navigate("/play/arena");
+    navigate(`/play/arena?m=${m}&inc=${inc}&mode=${mode}`);
+
   };
 
   const handleCustomStart = () => {
@@ -79,7 +89,9 @@ export default function TimerSetupPage() {
           incrementSeconds: i,
           hasTimer: true,
         });
-        navigate("/play/arena");
+        // navigate("/play
+        navigate(`/play/arena?m=${m}&inc=${inc}&mode=${mode}`);
+
       }, 300);
     } else {
       // fallback if modal not found
@@ -89,7 +101,9 @@ export default function TimerSetupPage() {
         incrementSeconds: i,
         hasTimer: true,
       });
-      navigate("/play/arena");
+      // navigate("/play/arena");
+      navigate(`/play/arena?m=${m}&inc=${inc}&mode=${mode}`);
+
     }
   };
 
@@ -219,7 +233,9 @@ export default function TimerSetupPage() {
                       incrementSeconds: Number(customInc),
                       hasTimer: true,
                     });
-                    navigate("/play/arena");
+                    // navigate("/play/arena");
+                    navigate(`/play/arena?m=${m}&inc=${inc}&mode=${mode}`);
+
                   }}
                 >
                   Start

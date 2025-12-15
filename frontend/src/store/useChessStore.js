@@ -2,11 +2,15 @@ import { create } from "zustand";
 import { Chess } from "chess.js";
 
 export const useChessStore = create((set, get) => ({
+  playMode: 'Computer',
+  turn: 0,
   game: new Chess(),
   fen: new Chess().fen(),
-  pgn: "",
+  pgn: new Chess().pgn(),
   moveList: [],
 
+  // ---- Set playMode ----
+  setPlayMode: (mode) => set({ playMode: mode }),
   // ---- Update move list ----
   generateMoveList: () => {
     const game = get().game;
@@ -28,6 +32,7 @@ export const useChessStore = create((set, get) => ({
     });
 
     get().generateMoveList();
+    console.log(get().playMode);
   },
 
   // ---- Undo ----

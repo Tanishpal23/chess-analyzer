@@ -10,7 +10,24 @@ const BoardArea = () => {
   const [moveFrom, setMoveFrom] = useState("");
   const [optionSquares, setOptionSquares] = useState({});
 
-  
+  function makeRandomMove() {
+      // get all possible moves`
+      const possibleMoves = chessGame.moves();
+
+      // exit if the game is over
+      if (chessGame.isGameOver()) {
+        return;
+      }
+
+      // pick a random move
+      const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+
+      // make the move
+      chessGame.move(randomMove);
+
+      // update the position state
+      setChessPosition(chessGame.fen());
+    }
   
   function getMoveOptions(square) {
     const moves = game.moves({ square, verbose: true });
@@ -59,6 +76,7 @@ const BoardArea = () => {
     // setChessPosition(game.fen());
 
     
+    makeRandomMove()
   }
 
   function onPieceDrop({ sourceSquare, targetSquare }) {
